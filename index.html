@@ -8,43 +8,36 @@
         body, html {
             margin: 0;
             padding: 0;
-            overflow: hidden;
             width: 100%;
             height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            overflow: hidden;
         }
-        .model-container {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .landscape-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(90deg);
+            transform-origin: center center;
+            width: 100vh;
+            height: 100vw;
         }
         model-viewer {
-            width: 100%; /* Full width */
-            height: auto; /* Maintain aspect ratio */
-            --model-viewer-auto-rotate-delay: 3s;
-            --model-viewer-camera-orbit: 90deg 90deg 1.5m;
-            --model-viewer-max-camera-orbit: auto auto 10m;
-            --model-viewer-field-of-view: 45deg;
+            width: 100%; 
+            height: 100%;
         }
-        @media (orientation: portrait) {
-            /* Adjustments for portrait orientation to fill the viewport better */
-            model-viewer {
-                width: auto;
-                height: 100%;
+        @media (orientation: landscape) {
+            .landscape-container {
+                transform: none;
+                width: 100vw;
+                height: 100vh;
             }
         }
     </style>
 </head>
 <body>
-<div class="model-container">
+<div class="landscape-container">
     <model-viewer 
-        id="model-viewer"
         src="https://petersoon92.github.io/WebAR/Petynka_AR_Export.glb"
-        ios-src="https://petersoon92.github.io/WebAR/Petynka_AR_Export.usdz"
         ar 
         ar-modes="webxr scene-viewer quick-look"
         environment-image="https://petersoon92.github.io/WebAR/industrial_sunset_puresky_4k.hdr"
