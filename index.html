@@ -3,19 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>WebAR Example with Model Viewer</title>
+    <link rel="stylesheet" href="style.css">
     <script type="module" src="https://unpkg.com/@google/model-viewer@latest"></script>
-    <style>
-        model-viewer {
-            width: 100%;
-            height: 100vh; /* Make the viewer full height */
-            --model-viewer-auto-rotate-delay: 3s; /* Delays auto-rotation */
-            --model-viewer-camera-orbit: 90deg 90deg 1.5m; /* Adjust the initial camera angle */
-            --model-viewer-max-camera-orbit: auto auto 10m; /* Max camera orbit for user interaction */
-            --model-viewer-field-of-view: 45deg; /* Field of view */
-        }
-    </style>
 </head>
 <body>
+    <img src="3KK_Karta.jpg" alt="Map Image" id="map-image" />
     <model-viewer 
         src="https://petersoon92.github.io/WebAR/Petynka_AR_Export.glb"
         ar 
@@ -27,6 +19,5 @@
         auto-rotate
         background-color="#ffffff"> <!-- Set this to your desired background color -->
     </model-viewer>
-
 </body>
 </html>
