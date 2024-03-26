@@ -8,37 +8,33 @@
         body, html {
             margin: 0;
             padding: 0;
+            overflow: hidden;
             width: 100%;
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
         }
         .model-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
             width: 100vw;
             height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         model-viewer {
-            width: 100%; /* This will be adjusted based on the orientation */
-            height: auto;
+            width: 100%; /* Full width */
+            height: auto; /* Maintain aspect ratio */
             --model-viewer-auto-rotate-delay: 3s;
             --model-viewer-camera-orbit: 90deg 90deg 1.5m;
             --model-viewer-max-camera-orbit: auto auto 10m;
             --model-viewer-field-of-view: 45deg;
         }
-        /* Adjusting for landscape aspect ratio */
         @media (orientation: portrait) {
-            .model-container {
-                flex-direction: column;
-            }
+            /* Adjustments for portrait orientation to fill the viewport better */
             model-viewer {
                 width: auto;
-                height: 56.25vw; /* 16:9 aspect ratio */
-                max-height: 100vh;
+                height: 100%;
             }
         }
     </style>
@@ -46,7 +42,9 @@
 <body>
 <div class="model-container">
     <model-viewer 
+        id="model-viewer"
         src="https://petersoon92.github.io/WebAR/Petynka_AR_Export.glb"
+        ios-src="https://petersoon92.github.io/WebAR/Petynka_AR_Export.usdz"
         ar 
         ar-modes="webxr scene-viewer quick-look"
         environment-image="https://petersoon92.github.io/WebAR/industrial_sunset_puresky_4k.hdr"
