@@ -6,12 +6,13 @@
     <script type="module" src="https://unpkg.com/@google/model-viewer@latest"></script>
     <style>
         model-viewer {
-
-            --model-viewer-auto-rotate-delay: 3s; /* Delays auto-rotation */
-            --model-viewer-camera-orbit: 90deg 90deg 1.5m; /* Adjust the initial camera angle */
-            --model-viewer-max-camera-orbit: auto auto 10m; /* Max camera orbit for user interaction */
-            --model-viewer-field-of-view: 45deg; /* Field of view */
+        width: 100%;
+        height: 100vh;
+        padding-bottom: 60px; /* Add padding to the bottom */
+        box-sizing: border-box; /* Ensures padding is included in the height */
         }
+
+
         button {
             position: absolute; /* Position button over model-viewer */
             z-index: 1; /* Ensure button is clickable */
