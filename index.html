@@ -3,16 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>WebAR Example with Model Viewer</title>
+    <link rel="stylesheet" href="style.css">
     <script type="module" src="https://unpkg.com/@google/model-viewer@latest"></script>
     <style>
         model-viewer {
-            width: 600px; /* Adjust width as needed */
-            height: 400px; /* Adjust height as needed */
-            --model-viewer-auto-rotate-delay: 3s; /* Delays auto-rotation */
-            --model-viewer-camera-orbit: 90deg 90deg 1.5m; /* Adjust the initial camera angle */
-            --model-viewer-max-camera-orbit: auto auto 10m; /* Max camera orbit for user interaction */
-            --model-viewer-field-of-view: 45deg; /* Field of view */
-            margin: auto; /* Center the model-viewer */
+            width: 80vw; /* Default width, 80% of the viewport width */
+            height: 60vh; /* Default height, 60% of the viewport height */
+            max-width: 600px; /* Maximum width */
+            max-height: 400px; /* Maximum height */
+            margin: auto;
+            --model-viewer-auto-rotate-delay: 3s;
+            --model-viewer-camera-orbit: 90deg 90deg 1.5m;
+            --model-viewer-max-camera-orbit: auto auto 10m;
+            --model-viewer-field-of-view: 45deg;
+        }
+
+        /* Adjustments for smaller devices */
+        @media (max-width: 600px) {
+            model-viewer {
+                width: 95vw; /* Increase width to use more of the viewport on small devices */
+                height: 50vh; /* Adjust height accordingly */
+                max-height: 300px; /* Adjust maximum height */
+            }
+        }
+
+        /* Adjustments for very small devices */
+        @media (max-width: 400px) {
+            model-viewer {
+                width: 100vw; /* Use the full width for very small devices */
+                height: 40vh; /* Reduce the height a bit more */
+            }
         }
     </style>
 </head>
@@ -26,7 +46,7 @@
         shadow-softness="0.0"
         camera-controls
         auto-rotate
-        background-color="#ffffff"> <!-- Set this to your desired background color -->
+        background-color="#ffffff">
     </model-viewer>
 
 </body>
