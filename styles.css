@@ -1,48 +1,15 @@
 body, html {
+    width: 100%;
+    height: 100%;
     margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden; /* Prevent scrolling */
-}
-
-/* Ensures content is flexibly aligned and takes up the full screen */
-.content {
     display: flex;
-    flex-direction: column;
-    align-items: stretch; /* Stretch children to fill the width */
-    justify-content: flex-start; /* Align content to the top */
-    height: 100%;
-    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
 }
 
-/* Make image responsive and fill the width while maintaining its aspect ratio */
-#map-image {
-    width: 100%; /* Fill width */
-    height: auto; /* Maintain aspect ratio */
-    object-fit: cover; /* Cover the area without stretching the image */
-}
-
-/* Set model-viewer to take the remaining height after the image */
-model-viewer {
-    width: 100%;
-    height: calc(100vh - 200px); /* Subtract the approximate height of the image */
-    --model-viewer-auto-rotate-delay: 3s;
-    --model-viewer-camera-orbit: 90deg 90deg 1.5m;
-    --model-viewer-max-camera-orbit: auto auto 10m;
-    --model-viewer-field-of-view: 45deg;
-}
-
-@media (orientation: portrait) {
-    /* Adjust the height of the model viewer for portrait orientation */
-    model-viewer {
-        height: calc(100vh - 200px); /* Adjust this value if the image height is different */
-    }
-}
-
-@media (orientation: landscape) {
-    /* In landscape, the height can be shorter to account for wider screens */
-    model-viewer {
-        height: calc(100vh - 100px); /* You might need to adjust this */
-    }
+#start-ar {
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
 }
