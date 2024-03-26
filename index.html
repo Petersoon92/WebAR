@@ -6,52 +6,28 @@
     <script type="module" src="https://unpkg.com/@google/model-viewer@latest"></script>
     <style>
         model-viewer {
-        width: 100%;
-        height: 100vh;
-        padding-bottom: 60px; /* Add padding to the bottom */
-        box-sizing: border-box; /* Ensures padding is included in the height */
-        }
-
-
-        button {
-            position: absolute; /* Position button over model-viewer */
-            z-index: 1; /* Ensure button is clickable */
-            top: 20px;
-            left: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
+        width: 100%; /* Full width */
+        height: 50vh; /* Adjust the height to fit your needs */
+        --model-viewer-auto-rotate-delay: 3s;
+        --model-viewer-camera-orbit: 90deg 90deg 1.5m;
+        --model-viewer-max-camera-orbit: auto auto 10m;
+        --model-viewer-field-of-view: 45deg;
         }
     </style>
 </head>
 <body>
-    <button id="toggle-ar">Disable AR Mode</button> <!-- Initially AR is enabled -->
+    <button id="toggle-ar">Toggle AR Mode</button>
     <model-viewer 
-      id="model"
-      src="https://petersoon92.github.io/WebAR/Petynka_AR_Export.glb"
-      ar
-      ar-modes="webxr scene-viewer quick-look"
-      environment-image="https://petersoon92.github.io/WebAR/industrial_sunset_puresky_4k.hdr"
-      shadow-intensity="1"
-      shadow-softness="0.0"
-      camera-controls
-      auto-rotate
-      background-color="#ffffff">
+    id="model"
+    src="https://petersoon92.github.io/WebAR/Petynka_AR_Export.glb"
+    ios-src="https://petersoon92.github.io/WebAR/Petynka_AR_Export.usdz"
+    ar-modes="webxr scene-viewer quick-look"
+    environment-image="https://petersoon92.github.io/WebAR/industrial_sunset_puresky_4k.hdr"
+    shadow-intensity="1"
+    shadow-softness="0.0"
+    camera-controls
+    auto-rotate
+    background-color="#ffffff">
     </model-viewer>
-    <script>
-      document.getElementById('toggle-ar').addEventListener('click', function() {
-        const modelViewer = document.getElementById('model');
-        
-        // Check if AR is currently enabled
-        if (modelViewer.hasAttribute('ar')) {
-          // AR is enabled, so remove the attribute to disable AR
-          modelViewer.removeAttribute('ar');
-          this.textContent = 'Enable AR Mode'; // Update button text
-        } else {
-          // AR is disabled, so add the attribute to enable AR
-          modelViewer.setAttribute('ar', '');
-          this.textContent = 'Disable AR Mode'; // Update button text
-        }
-      });
-    </script>
 </body>
 </html>
