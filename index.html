@@ -5,41 +5,13 @@
     <title>WebAR Example with Model Viewer</title>
     <script type="module" src="https://unpkg.com/@google/model-viewer@latest"></script>
     <style>
-        body {
-            /* Rotate the entire body */
-            transform: rotate(90deg);
-            /* Move and center the content after rotation */
-            transform-origin: bottom left;
-            /* Take up the full width and height after rotation */
-            width: 100vh;
-            height: 100vw;
-            /* Adjust for the new center */
-            position: absolute;
-            top: 0;
-            left: 0;
-            overflow-y: scroll; /* Adjust scrolling behavior if necessary */
-            /* Ensure content is always centered */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
         model-viewer {
-            /* Adjust model-viewer size as needed */
             width: 100%;
-            height: 100vh;
-            --model-viewer-auto-rotate-delay: 3s;
-            --model-viewer-camera-orbit: 90deg 90deg 1.5m;
-            --model-viewer-max-camera-orbit: auto auto 10m;
-            --model-viewer-field-of-view: 45deg;
-        }
-        @media (orientation: landscape) {
-            body {
-                /* No rotation needed for landscape */
-                transform: none;
-                /* Revert width and height */
-                width: 100vw;
-                height: 100vh;
-            }
+            height: 100vh; /* Make the viewer full height */
+            --model-viewer-auto-rotate-delay: 3s; /* Delays auto-rotation */
+            --model-viewer-camera-orbit: 90deg 90deg 1.5m; /* Adjust the initial camera angle */
+            --model-viewer-max-camera-orbit: auto auto 10m; /* Max camera orbit for user interaction */
+            --model-viewer-field-of-view: 45deg; /* Field of view */
         }
     </style>
 </head>
@@ -53,7 +25,8 @@
         shadow-softness="0.0"
         camera-controls
         auto-rotate
-        background-color="#ffffff">
+        background-color="#ffffff"> <!-- Set this to your desired background color -->
     </model-viewer>
+
 </body>
 </html>
