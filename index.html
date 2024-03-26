@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Babylon.js AR Example</title>
+    <title>Babylon.js AR Placement Example</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.babylonjs.com/babylon.js"></script>
     <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
@@ -18,24 +18,24 @@
 
             var createScene = async function () {
                 var scene = new BABYLON.Scene(engine);
-                
-                // Camera not needed for AR, but leaving it here for the initial setup
-                var camera = new BABYLON.ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 2, new BABYLON.Vector3(0,0,5), scene);
-                camera.attachControl(canvas, true);
-                
-                // Basic lighting
-                var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1, 1, 0), scene);
-
-                // Simple sphere to test
-                var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 2}, scene);
 
                 // Enable AR
-                const xrHelper = await scene.createDefaultXRExperienceAsync({
-                    // Configuration options go here
-                    floorMeshes: [sphere]
+                const xr = await scene.createDefaultXRExperienceAsync({
+                    // Configure to not initialize a default camera
+                    createDeviceOrientationCamera: false,
                 });
 
-                // Additional XR settings and interactions can be defined here
+                // Wait for the XR session to start
+                await xr.baseExperience.sessionManager.onXRSessionInitObservable.addOnce(async () => {
+                    // Now the AR session has started, you can add objects to the scene
+                    var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(1, 1, 0), scene);
+
+                    // Place a sphere in AR
+                    var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 0.1}, scene);
+                    sphere.position.z = -0.5; // Move it in front of the camera
+
+                    // Interactions (e.g., placing the sphere at a specific location) would be added here
+                });
 
                 return scene;
             };
@@ -43,7 +43,9 @@
             var scene = await createScene();
 
             engine.runRenderLoop(function () {
-                scene.render();
+                if (scene) {
+                    scene.render();
+                }
             });
 
             window.addEventListener('resize', function () {
