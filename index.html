@@ -16,29 +16,29 @@
             overflow: hidden;
         }
         .model-container {
-            width: 100vw;
-            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            width: 100vw;
+            height: 100vh;
         }
         model-viewer {
-            width: 100%; /* Adjust width */
-            height: 100%; /* Adjust height */
+            width: 100%; /* This will be adjusted based on the orientation */
+            height: auto;
             --model-viewer-auto-rotate-delay: 3s;
             --model-viewer-camera-orbit: 90deg 90deg 1.5m;
             --model-viewer-max-camera-orbit: auto auto 10m;
             --model-viewer-field-of-view: 45deg;
-            transform-origin: center center;
         }
-        /* Rotate and scale model-viewer in portrait mode */
+        /* Adjusting for landscape aspect ratio */
         @media (orientation: portrait) {
-            .model-container model-viewer {
-                /* 90deg clockwise rotation */
-                transform: rotate(90deg) translateY(-50%);
-                transform-origin: center center;
-                width: 100vh;
-                height: 100vw;
+            .model-container {
+                flex-direction: column;
+            }
+            model-viewer {
+                width: auto;
+                height: 56.25vw; /* 16:9 aspect ratio */
+                max-height: 100vh;
             }
         }
     </style>
@@ -57,25 +57,5 @@
         background-color="#ffffff">
     </model-viewer>
 </div>
-<script>
-    function adjustModelViewer() {
-        const modelViewer = document.querySelector('model-viewer');
-        const isPortrait = window.innerHeight > window.innerWidth;
-        
-        if (isPortrait) {
-            // Calculate scale based on the viewport ratio
-            const scale = window.innerWidth / window.innerHeight;
-            modelViewer.style.transform = `rotate(90deg) scale(${scale})`;
-        } else {
-            modelViewer.style.transform = 'none';
-        }
-    }
-
-    window.addEventListener('resize', adjustModelViewer);
-    window.addEventListener('orientationchange', adjustModelViewer);
-
-    // Initial adjustment
-    adjustModelViewer();
-</script>
 </body>
 </html>
