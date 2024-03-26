@@ -13,19 +13,38 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden; /* Prevents scrolling to ensure the model viewer fits well */
+            overflow: hidden;
+        }
+        .model-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         model-viewer {
-            width: 100vw; /* Full width */
-            height: 50vh; /* Adjust the height to your preference */
+            width: 100%; /* Adjust width */
+            height: 100%; /* Adjust height */
             --model-viewer-auto-rotate-delay: 3s;
             --model-viewer-camera-orbit: 90deg 90deg 1.5m;
             --model-viewer-max-camera-orbit: auto auto 10m;
             --model-viewer-field-of-view: 45deg;
+            transform-origin: center center;
+        }
+        /* Rotate and scale model-viewer in portrait mode */
+        @media (orientation: portrait) {
+            .model-container model-viewer {
+                /* 90deg clockwise rotation */
+                transform: rotate(90deg) translateY(-50%);
+                transform-origin: center center;
+                width: 100vh;
+                height: 100vw;
+            }
         }
     </style>
 </head>
 <body>
+<div class="model-container">
     <model-viewer 
         src="https://petersoon92.github.io/WebAR/Petynka_AR_Export.glb"
         ar 
@@ -37,5 +56,26 @@
         auto-rotate
         background-color="#ffffff">
     </model-viewer>
+</div>
+<script>
+    function adjustModelViewer() {
+        const modelViewer = document.querySelector('model-viewer');
+        const isPortrait = window.innerHeight > window.innerWidth;
+        
+        if (isPortrait) {
+            // Calculate scale based on the viewport ratio
+            const scale = window.innerWidth / window.innerHeight;
+            modelViewer.style.transform = `rotate(90deg) scale(${scale})`;
+        } else {
+            modelViewer.style.transform = 'none';
+        }
+    }
+
+    window.addEventListener('resize', adjustModelViewer);
+    window.addEventListener('orientationchange', adjustModelViewer);
+
+    // Initial adjustment
+    adjustModelViewer();
+</script>
 </body>
 </html>
