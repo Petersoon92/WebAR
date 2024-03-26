@@ -6,23 +6,24 @@ body, html {
     overflow: hidden; /* Prevent scrolling */
 }
 
-.container {
+.content {
     display: flex;
     flex-direction: column; /* Stack children vertically */
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    width: 100%;
     height: 100%;
 }
 
 #map-image {
     max-width: 100%; /* Make image responsive */
-    max-height: 50vh; /* Adjust based on your needs */
+    height: auto; /* Maintain aspect ratio */
     margin-bottom: 20px; /* Space between image and model viewer */
 }
 
 model-viewer {
     width: 100%;
-    flex-grow: 1; /* Allow model-viewer to fill available space */
+    height: 60vh; /* Adjust based on your preference */
     --model-viewer-auto-rotate-delay: 3s;
     --model-viewer-camera-orbit: 90deg 90deg 1.5m;
     --model-viewer-max-camera-orbit: auto auto 10m;
